@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ajukan Pengaduan Parkir Liar - SIPAJULI</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <a href="#" class="logo">SIPAJULI<span>.</span></a>
+            <ul class="menu-links">
+                <span id="close-menu-btn" class="material-symbols-outline">close</span>
+                <li><a href="complaint.html">Laporan Pengaduan</a></li>
+                <li><a href="list_complaints.html">Status Pengajuan</a></li>
+                <li><a href="login.html">Profil</a></li>
+                <li><a href="profile.html">Login Admin</a></li>
+                <li><a href="register.html">Registrasi</a></li>
+            </ul>
+            <span id="menu-btn" class="material-symbols-outline">menu</span>
+        </nav>
+    </header>
+    <main>
+        <h1>Status Pengajuan Pengaduan</h1>
+        <?php
+        include 'includes/db_connect.php';
+        $sql = "SELECT * FROM complaints ORDER BY created_at DESC";
+        $result = $conn->query($sql);
+
+        if ($result->num_rows > 0) {
+            while($row = $result->fetch_assoc()) {
+                echo "<div class='complaint'>";
+                echo "<h2>Lokasi: " . $row["lokasi"] . "</h2>";
+                echo "<p>Deskripsi: " . $row["deskripsi"] . "</p>";
+                echo "<img src='uploads/" . $row["foto"] . "' alt='Foto Pengaduan'>";
+                echo "<p>Nama Pelapor: " . $row["nama"] . "</p>";
+                echo "<p>Status: " . $row["status"] . "</p>";
+                echo "</div>";
+            }
+        } else {
+            echo "Belum ada pengaduan.";
+        }
+        $conn->close();
+        ?>
+    </main>
+    <footer>
+        <p>&copy; 2024 SIPAJULI - Pengaduan Parkir Liar</p>
+    </footer>
+</body>
+</html>

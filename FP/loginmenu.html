@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - SIPAJULI</title>
+    <!-- JavaScript -->
+    <script src="js/loginmenu.js" defer type="module"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <a href="loginmenu.html" class="logo">SIPAJULI<span>.</span></a>
+            <div id="menu-btn" class="menu-icon">&#9776;</div>
+            <div id="close-menu-btn" class="menu-icon">&times;</div>
+        </nav>
+    </header>
+
+    <!-- Login Form -->
+    <div class="container">
+        <div class="form-wrapper">
+            <h1>Login</h1>
+            <form id="loginForm">
+                <div class="input-group">
+                    <label for="identifier">Email/Username:</label>
+                    <input type="text" id="identifier" name="identifier" required>
+                </div>
+                <div class="input-group">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" minlength="6" required>
+                </div>
+                <div class="input-group">
+                    <label for="loginType">Login as:</label>
+                    <select id="loginType" name="loginType" required>
+                        <option value="user">User</option>
+                        <option value="admin">Admin</option>
+                    </select>
+                </div>
+                <button type="submit">Login</button>
+            </form>
+            <div id="errorMessage" style="color:red;"></div>
+            <div class="social-buttons">
+                <button type="button" id="google-login-btn" class="google-button">
+                    <i class="fab fa-google"></i> Google</button>
+                <button type="button" class="facebook-btn">Facebook</button>
+            </div>
+            <p>Don't have an account? <a href="register.html">Create one</a></p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 SIPAJULI - Pengaduan Parkir Liar</p>
+    </footer>
+</body>
+</html>
