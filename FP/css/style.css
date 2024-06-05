@@ -72,14 +72,27 @@ body {
   cursor: pointer;
 }
 
+.logout-btn {
+  background-color: var(--accent-color);
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.logout-btn:hover {
+  background-color: darken(var(--accent-color), 10%);
+}
 /* Container for Form Wrapper */
 .container {
-  margin-top: 80px;
+  margin-top: 90px;
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 20px;
-  max-width: 1000px;
+  max-width: 500px;
   width: 100%;
 }
 
@@ -91,13 +104,136 @@ body {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   max-width: 700px;
   width: 100%;
+  margin-top: 80px;
+  text-align: center;
 }
 
 .form-wrapper h1 {
   margin-bottom: 20px;
   font-size: 24px;
+}
+
+.form-wrapper img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  margin-top: 20px;
+  object-fit: cover;
+}
+
+
+/* Button Styles */
+button[type="submit"],
+.back-btn {
+  width: 100%;
+  padding: 10px;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  transition: background-color 0.2s ease;
+}
+
+button[type="submit"] {
+  background-color: var(--primary-color);
+}
+
+button[type="submit"]:hover {
+  background-color: darken(var(--primary-color), 10%);
+}
+
+
+/* Styles for Complaint Page */
+.complaint-container {
+  margin-top: 120px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  max-width: 1000px;
+  width: 100%;
+}
+
+.complaint-form-wrapper {
+  background: var(--background-color);
+  padding: 40px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  max-width: 700px;
+  width: 100%;
+}
+
+.complaint-form-wrapper h1 {
+  margin-bottom: 20px;
+  font-size: 24px;
   text-align: center;
 }
+
+/* Styles for Complaint Page */
+.complaint-container {
+  margin-top: 120px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  max-width: 1000px;
+  width: 100%;
+}
+
+.complaint-form-wrapper {
+  background: var(--background-color);
+  padding: 40px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  max-width: 700px;
+  width: 100%;
+}
+
+.complaint-form-wrapper h1 {
+  margin-bottom: 20px;
+  font-size: 24px;
+  text-align: center;
+}
+
+/* Complaint List Styles */
+.complaint {
+  background: var(--background-color);
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  max-width: 700px;
+  width: 100%;
+}
+
+.complaint h2 {
+  margin-bottom: 10px;
+  font-size: 20px;
+}
+
+.complaint p {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.complaint img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.no-complaints-message {
+  text-align: center;
+  font-size: 18px;
+  color: var(--text-color);
+  display: none;
+}
+
+
 
 /* Input Group Styles */
 .input-group {
@@ -118,26 +254,16 @@ body {
   font-size: 16px;
 }
 
-/* Button Styles */
-button[type="submit"],
-.back-btn {
-  width: 100%;
-  padding: 10px;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  font-size: 16px;
+/* Navbar Profile Image Styles */
+.navbar .menu-links li img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
   cursor: pointer;
-  margin-top: 20px;
-  transition: background-color 0.2s ease;
 }
 
-button[type="submit"] {
-  background-color: var(--primary-color);
-}
-
-button[type="submit"]:hover {
-  background-color: darken(var(--primary-color), 10%);
+.navbar .menu-links li img:hover {
+  opacity: 0.8;
 }
 
 /* Custom Styles for User Profile */
@@ -146,7 +272,7 @@ button[type="submit"]:hover {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 100vh;
+  min-height: 90vh;
   padding: 20px;
 }
 
@@ -213,11 +339,11 @@ button[type="submit"]:hover {
 .social-buttons {
   display: flex;
   justify-content: space-between;
-  margin-top: 20px;
+  margin-top: 10px;
 }
 
 .social-buttons button {
-  width: 48%;
+  width: 100%;
   padding: 10px;
   border: none;
   border-radius: 4px;
@@ -226,22 +352,21 @@ button[type="submit"]:hover {
   transition: background-color 0.2s ease;
 }
 
+/* Google Button */
 .google-button {
+  width: 100%;
+  padding: 10px;
   background-color: #db4437;
   color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
 }
 
 .google-button:hover {
   background-color: darken(#db4437, 10%);
-}
-
-.facebook-btn {
-  background-color: #4267B2;
-  color: white;
-}
-
-.facebook-btn:hover {
-  background-color: darken(#4267B2, 10%);
 }
 
 /* Paragraph Styles */
@@ -286,21 +411,14 @@ p a:hover {
   }
 }
 
-/* Footer Styles */
-footer {
-  text-align: center;
-  color:#fff;
-  margin-top: 20px;
-  font-size: 0.875rem;
-}
-
 /* Hero Section Styles */
 .hero-section-index, .hero-section {
   display: flex;
-  align-items: center;
   justify-content: center;
-  min-height: 100vh;
+  align-items: center;
   padding: 20px;
+  max-width: 1000px;
+  width: 100%;
   text-align: center;
 }
 
@@ -350,6 +468,14 @@ footer {
   width: 50px;
   height: 50px;
   background: url('/images/admin-icon.png') no-repeat center center / cover;
+}
+
+/* Footer Styles */
+footer {
+  text-align: center;
+  color:#ffffff;
+  margin-top: 20px;
+  font-size: 0.875rem;
 }
 
 /* Mobile Menu Styles */

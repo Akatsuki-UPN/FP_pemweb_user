@@ -1,15 +1,15 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import {
   getStorage,
-  ref,
+  ref as storageRef,
   uploadBytes,
   getDownloadURL,
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js";
 import {
-  getFirestore,
-  collection,
-  addDoc,
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+  getDatabase,
+  ref as dbRef,
+  set,
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 import {
   getAuth,
   onAuthStateChanged,
@@ -19,6 +19,8 @@ import {
 const firebaseConfig = {
   apiKey: "AIzaSyA6d1UgqVmsuaX2kGVGxg2CPWUOv3wQ2X4",
   authDomain: "dbsipajuli.firebaseapp.com",
+  databaseURL:
+    "https://dbsipajuli-default-rtdb.asia-southeast1.firebasedatabase.app",
   projectId: "dbsipajuli",
   storageBucket: "dbsipajuli.appspot.com",
   messagingSenderId: "460540654838",
@@ -29,7 +31,7 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const storage = getStorage(app);
-const db = getFirestore(app);
+const db = getDatabase(app);
 const auth = getAuth(app);
 
 const complaintForm = document.getElementById("complaintForm");
@@ -54,16 +56,20 @@ complaintForm.addEventListener("submit", async (e) => {
 
   try {
     // Upload photo to Firebase Storage
-    const photoRef = ref(storage, "complaints/" + photo.name);
+    const photoRef = storageRef(
+      storage,
+      `complaints/${user.uid}/${photo.name}`
+    );
     await uploadBytes(photoRef, photo);
     const photoURL = await getDownloadURL(photoRef);
 
-    // Save complaint data to Firestore
-    await addDoc(collection(db, "complaints"), {
+    // Save complaint data to Realtime Database
+    const newComplaintRef = dbRef(db, `complaints/${user.uid}/${Date.now()}`);
+    await set(newComplaintRef, {
       name,
       description,
       photoURL,
-      timestamp: new Date(),
+      timestamp: new Date().toISOString(),
       userId: user.uid,
     });
 

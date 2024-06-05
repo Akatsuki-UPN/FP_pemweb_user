@@ -13,6 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Check login status and update navbar accordingly
   const loginLogoutBtn = document.getElementById("loginLogoutBtn");
+
   firebase.auth().onAuthStateChanged((user) => {
     if (user) {
       loginLogoutBtn.innerHTML = '<a href="#" id="logoutBtn">Logout</a>';
