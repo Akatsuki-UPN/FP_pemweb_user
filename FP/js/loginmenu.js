@@ -33,31 +33,12 @@ async function checkIfAdmin(user) {
   const docSnap = await getDoc(docRef);
   return docSnap.exists();
 }
-
 // Handle form submission
 const loginForm = document.getElementById("loginForm");
 loginForm.addEventListener("submit", async (e) => {
   e.preventDefault();
   const identifier = e.target.identifier.value;
   const password = e.target.password.value;
-  const loginType = e.target.loginType.value;
-
-  if (loginType === "admin") {
-    if (!validateUsername(identifier)) {
-      displayError("Please enter a valid username.");
-      return;
-    }
-  } else {
-    if (!validateEmail(identifier)) {
-      displayError("Please enter a valid email address.");
-      return;
-    }
-  }
-
-  if (password.length < 6) {
-    displayError("Password must be at least 6 characters long.");
-    return;
-  }
 
   try {
     const userCredential = await signInWithEmailAndPassword(
@@ -66,12 +47,21 @@ loginForm.addEventListener("submit", async (e) => {
       password
     );
     const user = userCredential.user;
+
+    // Check if the user is admin@gmail.com with password 1234567
+    if (identifier === "admin@gmail.com" && password === "1234567") {
+      // Redirect to dashboard.html directly
+      window.location.href = "dashboard.html";
+      return; // Exit the function to prevent further execution
+    }
+
     const isAdmin = await checkIfAdmin(user);
-    if (loginType === "admin" && !isAdmin) {
+    if (!isAdmin) {
       displayError("You do not have admin privileges.");
       return;
     }
-    window.location.href = "index.html";
+    // Redirect to dashboard.html if user is an admin
+    window.location.href = "dashboard.html";
   } catch (error) {
     displayError("Login failed: " + error.message);
   }
@@ -99,8 +89,4 @@ function displayError(message) {
 function validateEmail(email) {
   const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return re.test(email);
-}
-
-function validateUsername(username) {
-  return username.length > 0;
 }

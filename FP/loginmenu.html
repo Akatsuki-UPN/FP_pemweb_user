@@ -24,19 +24,12 @@
             <h1>Login</h1>
             <form id="loginForm">
                 <div class="input-group">
-                    <label for="identifier">Email/Username:</label>
+                    <label for="identifier">Email:</label>
                     <input type="text" id="identifier" name="identifier" required>
                 </div>
                 <div class="input-group">
                     <label for="password">Password:</label>
                     <input type="password" id="password" name="password" minlength="6" required>
-                </div>
-                <div class="input-group">
-                    <label for="loginType">Login as:</label>
-                    <select id="loginType" name="loginType" required>
-                        <option value="user">User</option>
-                        <option value="admin">Admin</option>
-                    </select>
                 </div>
                 <button type="submit">Login</button>
             </form>
@@ -44,9 +37,10 @@
             <label for="google-login-btn">or login with:</label>
             <div class="social-buttons">
                 <button type="button" id="google-login-btn" class="google-button">
-                    <i class="fab fa-google"></i> Google</button>
+                    <i class="fab fa-google"></i> Google</button>                  
             </div>
-            <p>Don't have an account? <a href="register.html">Create one</a></p>
+            
+            <p>Don't have an account? <a href="register.html">Create one</a> </p>
         </div>
     </div>
 

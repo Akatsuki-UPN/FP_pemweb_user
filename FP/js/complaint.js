@@ -35,6 +35,7 @@ const db = getDatabase(app);
 const auth = getAuth(app);
 
 const complaintForm = document.getElementById("complaintForm");
+
 complaintForm.addEventListener("submit", async (e) => {
   e.preventDefault();
 

@@ -1,58 +1,108 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Ajukan Pengaduan Parkir Liar - SIPAJULI</title>
-    <link rel="stylesheet" href="css/style.css" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Pengaduan Juru Parkir Liar</title>
+    <link rel="stylesheet" href="css/dstyle.css">
+    <script type="module" defer src="js/dashboard.js"></script>
 </head>
 <body>
-    <header>
-        <nav class="navbar">
-            <a href="index.html" class="logo">SIPAJULI<span>.</span></a>
-            <div id="menu-btn" class="menu-icon">&#9776;</div>
-            <ul class="menu-links">
-                <li><a href="complaint.html">Laporan Pengaduan</a></li>
-                <li><a href="list_complaints.html">Status Pengajuan</a></li>
-                <li><a href="userprofil.html">Profil</a></li>
-            </ul>
-            <div id="close-menu-btn" class="menu-icon">&times;</div>
-        </nav>
-    </header>
-    <main>
-        <h1>Dashboard Admin</h1>
-        <?php
-        include 'includes/db_connect.php';
-        session_start();
-
-        if (!isset($_SESSION['user_id'])) {
-            header("Location: login.html");
-            exit();
-        }
-
-        $sql = "SELECT COUNT(*) AS total_complaints FROM complaints";
-        $result = $conn->query($sql);
-        $stats = $result->fetch_assoc();
-
-        echo "Total Pengaduan: " . $stats['total_complaints'];
-
-        $sql = "SELECT * FROM complaints ORDER BY created_at DESC LIMIT 10";
-        $result = $conn->query($sql);
-
-        while($row = $result->fetch_assoc()) {
-            echo "<div class='complaint'>";
-            echo "<h2>Lokasi: " . $row["lokasi"] . "</h2>";
-            echo "<p>Deskripsi: " . $row["deskripsi"] . "</p>";
-            echo "<img src='uploads/" . $row["foto"] . "' alt='Foto Pengaduan'>";
-            echo "</div>";
-        }
-
-        $conn->close();
-        ?>
-    </main>
-    <footer>
-        <p>&copy; 2024 SIPAJULI - Pengaduan Parkir Liar</p>
-    </footer>
+    <div class="sidebar">
+        <!-- Sidebar content -->
+        <h2>Admin Dashboard</h2>
+        <ul>
+            <li><a href="#home" onclick="showSection('home')">Home</a></li>
+            <li><a href="#complaints" onclick="showSection('complaints')">Complaints</a></li>
+            <li><a href="#users" onclick="showSection('users')">Users</a></li>
+            <li><a href="#settings" onclick="showSection('settings')">Settings</a></li>
+            <li><a href="loginmenu.html">Logout</a></li>
+        </ul>
+        <ul id="usersList" style="display: none;"></ul> <!-- Display user list -->
+    </div>
+    
+    <div class="main-content">
+        <header>
+            <h1>Welcome, Admin</h1>
+        </header>
+        <section id="home" class="content-section">
+            <h2>Overview</h2>
+            <div class="box-container">
+                <div class="box">
+                    <h3>Data Pengaduan</h3>
+                    <p id="totalComplaints">Total: 0</p>
+                </div>
+                <div class="box">
+                </div>
+                <div class="box">
+                </div>
+            </div>
+            <div class="chart-container">
+            </div>
+        </section>
+        <section id="complaints" class="content-section" style="display:none;">
+            <h2>Complaints</h2>
+            <!-- Sorting Options -->
+            <div class="sorting-options">
+                <label for="sortSelect">Sort By:</label>
+                <select id="sortSelect" onchange="sortComplaints()">
+                    <option value="newestFirst">Newest First</option>
+                    <option value="oldestFirst">Oldest First</option>
+                  </select>
+                  
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Date</th>
+                        <th>UserID</th>
+                        <th>Location</th>
+                        <th>Description</th>
+                        <th>Image</th>
+                    </tr>
+                </thead>
+                <tbody id="complaintsTableBody">
+                    <!-- Complaint rows will be appended here by JavaScript -->
+                </tbody>
+            </table>
+        </section>
+        <section id="users" class="content-section" style="display:none;">
+            <h2>Users</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <!-- Add more columns as needed -->
+                    </tr>
+                </thead>
+                <tbody id="usersTableBody">
+                    <!-- User rows will be appended here by JavaScript -->
+                </tbody>
+            </table>
+        </section>  
+        <section id="settings" class="content-section" style="display:none;">
+            <h2>Settings</h2>
+            <form id="settingsForm">
+                <div class="form-group">
+                    <label for="siteName">Site Name:</label>
+                    <input type="text" id="siteName" name="siteName" value="Pengaduan Juru Parkir Liar">
+                </div>
+                <div class="form-group">
+                    <label for="adminEmail">Admin Email:</label>
+                    <input type="email" id="adminEmail" name="adminEmail" value="admin@example.com">
+                </div>
+                <div class="form-group">
+                    <label for="itemsPerPage">Items Per Page:</label>
+                    <input type="number" id="itemsPerPage" name="itemsPerPage" value="10">
+                </div>
+                <div class="form-group">
+                    <button type="submit">Save Settings</button>
+                </div>
+            </form>
+        </section>
+    </div>
 </body>
 </html>

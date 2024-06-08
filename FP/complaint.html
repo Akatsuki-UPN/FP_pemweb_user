@@ -47,37 +47,6 @@
         <p>&copy; 2024 SIPAJULI - Pengaduan Parkir Liar</p>
     </footer>
 
-    <script type="module">
-
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-
-        const firebaseConfig = {
-          apiKey: "AIzaSyA6d1UgqVmsuaX2kGVGxg2CPWUOv3wQ2X4",
-          authDomain: "dbsipajuli.firebaseapp.com",
-          databaseURL: "https://dbsipajuli-default-rtdb.asia-southeast1.firebasedatabase.app",
-          projectId: "dbsipajuli",
-          storageBucket: "dbsipajuli.appspot.com",
-          messagingSenderId: "460540654838",
-          appId: "1:460540654838:web:2a67208d8b4eb130dee8d7"
-        };
-      
-        const app = initializeApp(firebaseConfig);
-
-        import {getDatabase, ref, child, get, set, update, remove} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-
-        const db = getDatabase();
-
-        let name = document.getElementById('name');
-        let description = document.getElementById('description');
-        let photo = document.getElementById('photo');
-
-        function AddData (){
-            set(ref(db, 'EmployeeSet/' + CnicInp.value), {
-                nameofemployee: {}
-            })
-        }
-      </script>
-
     <!-- JavaScript -->
     <script type="module" src="js/complaint.js"></script>
 </body>
